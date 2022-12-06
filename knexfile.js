@@ -1,44 +1,27 @@
 // Update with your config settings.
-
-module.exports = {
-
-  development: {
+const sharedConfig = {
     client: 'sqlite3',
-    connection: {
-      filename: './dev.sqlite3'
-    }
-  },
-
-  testing: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    useNullAsDefault: true,
     migrations: {
-      tableName: 'knex_migrations'
-    }
-  },
-
-  production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      directory: './data/migrations',
     },
+    seeds: {
+      directory: './data/seeds',
+    },
+    // this enables foreign keys in SQLite
     pool: {
-      min: 2,
-      max: 10
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done)
+      },
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
   }
-
+  module.exports = {
+  development: {
+    ...sharedConfig,
+    connection: { filename: './data/movies.db3' },
+  },
+  testing: {
+    ...sharedConfig,
+    connection: { filename: './data/testing.db3' },
+  },
 };
