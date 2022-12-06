@@ -5,7 +5,8 @@ exports.up = function(knex) { //eslint-disable-line
     tbl.string('title', 250)
         .unique()
         .notNullable()
-    tbl.string('Top_Ten', 15)
+    tbl.integer('Top_Ten', 15)
+       .unique()
   })
 };
 

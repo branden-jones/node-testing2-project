@@ -1,7 +1,9 @@
 const express = require('express');
 const server = express();
+const movieRouter = require('./movies/movies-router');
 
 server.use(express.json())
+server.use('/api/movies', movieRouter)
 
 server.get('/', (req,res) => {
     res.status(200).json({
