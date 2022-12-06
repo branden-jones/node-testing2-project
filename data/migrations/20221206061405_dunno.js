@@ -11,5 +11,5 @@ exports.up = function(knex) { //eslint-disable-line
 };
 
 exports.down = function(knex) { //eslint-disable-line
-    return knex.schema.dropIfTableExists('movies')
+    return knex.schema.dropTableIfExists("movies")
 };

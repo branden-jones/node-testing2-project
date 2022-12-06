@@ -10,7 +10,15 @@ function specific(id){
         .first()
 }
 
+async function add(newMovie){
+    const [added] = await db('movies')
+        .insert(newMovie)
+    const newbie = await specific(added)
+    return newbie
+}
+
 module.exports = {
     list,
-    specific
+    specific,
+    add
 }
