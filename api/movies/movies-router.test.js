@@ -36,7 +36,7 @@ describe('[GET]:id grabbing proper movie', () => {
     test('returns error with invalid id', async () => {
         const badRes = await request(server).get('/api/movies/25')
         expect(badRes.status).toBe(400)
-        // expect(badRes.message).toEqual(/No movie matching ID/i)
+        expect(badRes.body.message).toMatch(/No movie matching ID/i)
     })
 })
 
